@@ -44,6 +44,10 @@ export async function getStaticProps({ params }) {
   try {
     const { title, name, is_animated, stickers } = await getStickers(params.stickers)
 
+    if (!stickers.length) {
+      throw new Error()
+    }
+
     return {
       props: {
         title,

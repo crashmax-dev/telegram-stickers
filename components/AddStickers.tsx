@@ -23,6 +23,8 @@ const Button = styled.button`
   font-weight: 600;
   cursor: pointer;
   text-transform: uppercase;
+  font-family: inherit;
+  border-radius: 4px;
 
   :hover {
     background: #3476AB;

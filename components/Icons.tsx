@@ -4,7 +4,7 @@ interface LoadingIconProps {
 }
 
 const LoadingIcon: React.FC<LoadingIconProps> = ({ width, height }) => (
-  <svg viewBox="0 0 24 24" style={{ width: width || '26px', height }} className="icon">
+  <svg viewBox="0 0 24 24" style={{ width, height }}>
     <defs>
       <linearGradient x1="28.154%" y1="63.74%" x2="74.629%" y2="17.783%" id="a">
         <stop stopColor="currentColor" offset="0%"></stop>

@@ -1,66 +1,35 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { getStickers } from './api/stickers'
 import { StickerSet } from 'telegraf/typings/core/types/typegram'
+import { Title } from '~/components/Title'
+import { Layout } from '~/components/Layout'
+import { LoadingIcon } from '~/components/Icons'
+import { AddStickers } from '~/components/AddStickers'
+import { StickersList } from '~/components/StickersList'
 
 export default function StickerPackPage({ title, name, is_animated, stickers }: StickerSet) {
-  const router = useRouter()
-
   useEffect(() => {
     import('@lottiefiles/lottie-player/dist/tgs-player')
-  })
+  }, [])
+
+  if (!stickers) {
+    return (
+      <Layout justifyContent="center">
+        <LoadingIcon width="46px" height="46px" />
+      </Layout>
+    )
+  }
 
   return (
-    <div>
-      <Head>
-        <title>{title}</title>
-      </Head>
+    <Layout title={title} justifyContent="space-between">
+      <Title>
+        {title}
+      </Title>
 
-      <main>
-        <h1 style={{ textAlign: 'center' }}>
-          {title}
-        </h1>
+      <StickersList stickers={stickers} is_animated={is_animated} />
 
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {stickers?.map(({ file_id, emoji }, key) => {
-            if (is_animated) {
-              return (
-                <tgs-player
-                  key={key}
-                  hover
-                  loop
-                  mode="normal"
-                  src={`/api/image/${file_id}`}
-                  alt={emoji}
-                  style={{ width: '128px', height: '128px' }}
-                />
-              )
-            } else {
-              return (
-                <Image
-                  key={key}
-                  alt={emoji}
-                  width="128"
-                  height="128"
-                  src={`/api/image/${file_id}`}
-                />
-              )
-            }
-          })}
-        </div>
-
-        <button
-          type="button"
-          style={{ width: '100%', padding: '1rem', marginTop: '1rem' }}
-          onClick={() => router.push(`tg://addstickers?set=${name}`)}
-        >
-          Add Stickers
-        </button>
-      </main>
-
-    </div>
+      <AddStickers name={name} />
+    </Layout >
   )
 }
 

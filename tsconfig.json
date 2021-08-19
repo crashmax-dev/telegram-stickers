@@ -21,6 +21,9 @@
     "paths": {
       "~/lib/*": [
         "lib/*"
+      ],
+      "~/components/*": [
+        "components/*"
       ]
     }
   },

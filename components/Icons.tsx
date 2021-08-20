@@ -3,7 +3,7 @@ interface LoadingIconProps {
   height?: string
 }
 
-const LoadingIcon: React.FC<LoadingIconProps> = ({ width, height }) => (
+export const LoadingIcon: React.FC<LoadingIconProps> = ({ width, height }) => (
   <svg viewBox="0 0 24 24" style={{ width, height }}>
     <defs>
       <linearGradient x1="28.154%" y1="63.74%" x2="74.629%" y2="17.783%" id="a">
@@ -26,7 +26,3 @@ const LoadingIcon: React.FC<LoadingIconProps> = ({ width, height }) => (
     />
   </svg>
 )
-
-export {
-  LoadingIcon
-}

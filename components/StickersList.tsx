@@ -1,11 +1,14 @@
 import Image from 'next/image'
-import styled from '@emotion/styled'
+import { css } from 'linaria'
+import { styled } from 'linaria/react'
 import { StickerSet } from 'telegraf/typings/core/types/typegram'
 
-export const StickersList: React.FC<Pick<StickerSet, 'stickers' | 'is_animated'>> = ({ stickers, is_animated }) => {
+type StickersListProps = Pick<StickerSet, 'stickers' | 'is_animated'>
+
+export const StickersList: React.FC<StickersListProps> = ({ stickers, is_animated }) => {
   return (
     <List>
-      {stickers?.map(({ file_id, emoji }, key) => {
+      {stickers.map(({ file_id, emoji }, key) => {
         if (is_animated) {
           return (
             <tgs-player
@@ -15,12 +18,7 @@ export const StickersList: React.FC<Pick<StickerSet, 'stickers' | 'is_animated'>
               alt={emoji}
               mode="normal"
               src={`/api/image/${file_id}`}
-              style={{
-                background: '#232E3C',
-                borderRadius: '4px',
-                width: '128px',
-                height: '128px'
-              }}
+              class={TgsImage}
             />
           )
         } else {
@@ -28,8 +26,8 @@ export const StickersList: React.FC<Pick<StickerSet, 'stickers' | 'is_animated'>
             <WebpImage
               key={key}
               alt={emoji}
-              width="128"
-              height="128"
+              width={128}
+              height={128}
               src={`/api/image/${file_id}`}
             />
           )
@@ -38,6 +36,13 @@ export const StickersList: React.FC<Pick<StickerSet, 'stickers' | 'is_animated'>
     </List>
   )
 }
+
+const TgsImage = css`
+  background: #232E3C;
+  border-radius: 4px;
+  width: 128px;
+  height: 128px;
+`
 
 const WebpImage = styled(Image)`
   border-radius: 4px;

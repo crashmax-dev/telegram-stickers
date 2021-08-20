@@ -1,5 +1,6 @@
-import styled from '@emotion/styled'
 import Head from 'next/head'
+import { css } from 'linaria'
+import { styled } from 'linaria/react'
 
 interface LayoutProps {
   title?: string
@@ -11,31 +12,35 @@ export const Layout: React.FC<LayoutProps> = ({ title, justifyContent, children 
     <Main justifyContent={justifyContent}>
       <Head>
         <title>{title}</title>
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
-          
-          * {
-            margin: 0;
-            border: 0 solid;
-            box-sizing: border-box;
-          }
-          
-          #__next {
-            height: inherit;
-          }
-          
-          html, body {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            font-family: 'Inter', sans-serif;
-          }
-        `}</style>
+        {GlobalStyles}
       </Head>
       {children}
     </Main>
   )
 }
+
+const GlobalStyles = css`
+  :global() {
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+
+    * {
+      margin: 0;
+      border: 0 solid;
+      box-sizing: border-box;
+    }
+
+    #__next {
+      height: inherit;
+    }
+
+    html, body {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Inter', sans-serif;
+    }
+  }
+`
 
 const Main = styled.main<LayoutProps>`
   height: inherit;

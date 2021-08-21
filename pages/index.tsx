@@ -20,6 +20,7 @@ export default function IndexPage() {
   const searchStickers = async () => {
     if (query.length) {
       try {
+        setStickerSet(undefined)
         setLoading(true)
 
         const response = await fetch('/api/stickers', {
@@ -31,8 +32,6 @@ export default function IndexPage() {
         if (response.ok) {
           const data = await response.json()
           setStickerSet(data)
-        } else {
-          setStickerSet(undefined)
         }
       } catch (err) {
         console.log(err)

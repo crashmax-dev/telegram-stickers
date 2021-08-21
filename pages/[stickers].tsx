@@ -1,26 +1,22 @@
-import { useEffect } from 'react'
 import { getStickers } from './api/stickers'
-import { StickerSet } from 'telegraf/typings/core/types/typegram'
 import { Layout } from '~/components/Layout'
 import { AddStickers } from '~/components/AddStickers'
 import { StickersList } from '~/components/StickersList'
+import { StickerSet } from 'telegraf/typings/core/types/typegram'
 
-export default function StickerPackPage({ title, name, is_animated, stickers }: StickerSet) {
-  useEffect(() => {
-    import('@lottiefiles/lottie-player/dist/tgs-player')
-  }, [])
 
-  if (!stickers) {
+export default function StickerPackPage(props: StickerSet) {
+  if (!Object.keys(props).length) {
     return (
       <Layout justifyContent="center" loading />
     )
   }
 
   return (
-    <Layout title={title} justifyContent="space-between">
-      <StickersList stickers={stickers} is_animated={is_animated} />
-      <AddStickers name={name} />
-    </Layout >
+    <Layout title={props.title} justifyContent="space-between">
+      <StickersList stickerSet={props} />
+      <AddStickers name={props.name} />
+    </Layout>
   )
 }
 
@@ -33,19 +29,14 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   try {
-    const { title, name, is_animated, stickers } = await getStickers(params.stickers)
+    const stickersSet = await getStickers(params.stickers)
 
-    if (!stickers.length) {
+    if (!stickersSet.stickers.length) {
       throw new Error()
     }
 
     return {
-      props: {
-        title,
-        name,
-        is_animated,
-        stickers
-      }
+      props: stickersSet
     }
   } catch (_) {
     return {

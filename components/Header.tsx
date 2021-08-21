@@ -1,5 +1,5 @@
 import { styled } from 'linaria/react'
-import StringReplace from 'react-string-replace'
+import { StringReplace } from './StringReplace'
 
 interface HeaderProps {
   title: string
@@ -8,16 +8,7 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <Title>
-      {StringReplace(title, /@(\w+)/g, (match, key) => (
-        <a
-          key={key}
-          href={`https://t.me/${match}`}
-          target="_blank"
-          rel="noreferrer"
-        >
-          {match}
-        </a>
-      ))}
+      <StringReplace str={title} />
     </Title>
   )
 }

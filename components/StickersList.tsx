@@ -6,35 +6,42 @@ import { StickerSet } from 'telegraf/typings/core/types/typegram'
 import { StringReplace } from './StringReplace'
 
 interface StickersListProps {
-  stickerSet: StickerSet
-  is_descriptions?: boolean
+  stickerPack: StickerSet
+  is_description?: boolean
 }
 
-export const StickersList: React.FC<StickersListProps> = ({ stickerSet, is_descriptions }) => {
+export const StickersList: React.FC<StickersListProps> = ({ stickerPack, is_description }) => {
+  const {
+    title,
+    stickers,
+    is_animated,
+    contains_masks
+  } = stickerPack
+
   useEffect(() => {
     import('@lottiefiles/lottie-player/dist/tgs-player')
   }, [])
 
   return (
     <React.Fragment>
-      {is_descriptions &&
+      {is_description &&
         <Description>
           <Badge color="#242f3d">
-            <StringReplace str={stickerSet.title} />
+            <StringReplace str={title} />
           </Badge>
-          {stickerSet.contains_masks ?
+          {contains_masks ?
             <Badge color="#4CAF50">Masks</Badge> :
             <Badge color="#4CAF50">Without Masks</Badge>
           }
-          {stickerSet.is_animated ?
+          {is_animated ?
             <Badge color="#673AB7">Animated</Badge> :
             <Badge color="#673AB7">Static</Badge>
           }
         </Description>
       }
       <List>
-        {stickerSet.stickers.map(({ file_id, emoji }, key) => {
-          if (stickerSet.is_animated) {
+        {stickers.map(({ file_id, emoji }, key) => {
+          if (is_animated) {
             return (
               <tgs-player
                 hover
@@ -61,6 +68,10 @@ export const StickersList: React.FC<StickersListProps> = ({ stickerSet, is_descr
       </List>
     </React.Fragment>
   )
+}
+
+StickersList.defaultProps = {
+  is_description: false
 }
 
 const TgsImage = css`

@@ -14,7 +14,7 @@ export default function StickerPackPage(props: StickerSet) {
 
   return (
     <Layout title={props.title} justifyContent="space-between">
-      <StickersList stickerSet={props} />
+      <StickersList stickerPack={props} />
       <AddStickers name={props.name} />
     </Layout>
   )

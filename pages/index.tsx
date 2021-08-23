@@ -11,7 +11,7 @@ export default function IndexPage() {
   const [text, setText] = useState('')
   const [loading, setLoading] = useState(false)
   const [query] = useDebounce(text, 500)
-  const [stickerSet, setStickerSet] = useState<StickerSet>()
+  const [stickerPack, setStickerPack] = useState<StickerSet>()
 
   useEffect(() => {
     searchStickers()
@@ -20,7 +20,7 @@ export default function IndexPage() {
   const searchStickers = async () => {
     if (query.length) {
       try {
-        setStickerSet(undefined)
+        setStickerPack(null)
         setLoading(true)
 
         const response = await fetch('/api/stickers', {
@@ -31,7 +31,8 @@ export default function IndexPage() {
 
         if (response.ok) {
           const data = await response.json()
-          setStickerSet(data)
+          setStickerPack(data)
+          console.log(data)
         }
       } catch (err) {
         console.log(err)
@@ -52,11 +53,11 @@ export default function IndexPage() {
         />
         <InputRightElement>
           {loading && <LoadingIcon width="22px" height="22px" />}
-          {stickerSet && <Clipboard text={window.location.href + query} />}
+          {stickerPack && <Clipboard text={window.location.href + query} />}
         </InputRightElement>
       </FormInput>
-      {stickerSet?.stickers.length &&
-        <StickersList stickerSet={stickerSet} is_descriptions />
+      {stickerPack?.stickers.length > 0 &&
+        <StickersList stickerPack={stickerPack} is_description />
       }
     </Layout>
   )

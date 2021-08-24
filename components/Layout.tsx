@@ -19,7 +19,7 @@ export const Layout: React.FC<LayoutProps> = ({ title, justifyContent, loading, 
         {GlobalStyles}
       </Head>
       {loading ?
-        <LoadingIcon width="46px" height="46px" /> :
+        <LoadingIcon style={{ width: '46px', height: '46px' }} /> :
         <React.Fragment>
           <Header title={title} />
           {children}

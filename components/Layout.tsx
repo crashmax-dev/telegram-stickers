@@ -4,6 +4,7 @@ import { css } from 'linaria'
 import { styled } from 'linaria/react'
 import { Header } from './Header'
 import { LoadingIcon } from './Icons'
+import { GithubCorner } from './GithubCorner'
 
 interface LayoutProps {
   title?: string
@@ -21,6 +22,7 @@ export const Layout: React.FC<LayoutProps> = ({ title, justifyContent, loading, 
       {loading ?
         <LoadingIcon style={{ width: '46px', height: '46px' }} /> :
         <React.Fragment>
+          <GithubCorner />
           <Header title={title} />
           {children}
         </React.Fragment>
@@ -42,6 +44,11 @@ const GlobalStyles = css`
       margin: 0;
       border: 0 solid;
       box-sizing: border-box;
+    }
+
+    ::selection {
+      color: #0E1621;
+      background-color: #FFF;
     }
 
     #__next {

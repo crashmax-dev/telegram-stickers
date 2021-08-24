@@ -15,4 +15,5 @@ export const Header: React.FC<HeaderProps> = ({ title }) => {
 
 const Title = styled.h1`
   text-align: center;
+  padding: 1rem;
 `

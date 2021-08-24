@@ -32,6 +32,7 @@ export const Clipboard: React.FC<ClipboardProps> = ({ text }) => {
     >
       <button
         style={{
+          padding: 0,
           color: '#FFFFFF',
           background: 'transparent'
         }}

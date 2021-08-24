@@ -30,15 +30,19 @@ export default function IndexPage() {
         })
 
         if (response.ok) {
-          const data = await response.json()
-          setStickerPack(data)
-          console.log(data)
+          const data = await response.json() as StickerSet
+
+          if (data.stickers.length) {
+            setStickerPack(data)
+          }
         }
       } catch (err) {
         console.log(err)
       } finally {
         setLoading(false)
       }
+    } else {
+      setStickerPack(null)
     }
   }
 
@@ -52,13 +56,11 @@ export default function IndexPage() {
           onChange={v => setText(v.target.value)}
         />
         <InputRightElement>
-          {loading && <LoadingIcon width="22px" height="22px" />}
+          {loading && <LoadingIcon style={{ width: '20px', height: '20px' }} />}
           {stickerPack && <Clipboard text={window.location.href + query} />}
         </InputRightElement>
       </FormInput>
-      {stickerPack?.stickers.length > 0 &&
-        <StickersList stickerPack={stickerPack} is_description />
-      }
+      {stickerPack?.stickers && <StickersList stickerPack={stickerPack} is_description />}
     </Layout>
   )
 }
@@ -75,7 +77,7 @@ const Input = styled.input`
   width: inherit;
   padding: 12px;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.3;
   color: #FFFFFF;
   background-color: #242F3D;
   border-radius: 4px;

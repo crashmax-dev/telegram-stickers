@@ -1,10 +1,10 @@
 import { styled } from 'linaria/react'
 import { useRouter } from 'next/router'
-import { StickerSet } from 'telegraf/typings/core/types/typegram'
+import type { StickerSet } from 'telegraf/typings/core/types/typegram'
 
 type AddStickersProps = Pick<StickerSet, 'name'>
 
-export const AddStickers: React.FC<AddStickersProps> = ({ name }) => {
+export const AddStickers = ({ name }: AddStickersProps) => {
   const router = useRouter()
 
   return (

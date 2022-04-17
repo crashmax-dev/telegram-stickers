@@ -2,18 +2,19 @@ import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { css } from 'linaria'
 import { styled } from 'linaria/react'
-import { StickerSet } from 'telegraf/typings/core/types/typegram'
 import { StringReplace } from './StringReplace'
+import type { StickerSet } from 'telegraf/typings/core/types/typegram'
 
 interface StickersListProps {
   stickerPack: StickerSet
-  is_description?: boolean
 }
 
-export const StickersList: React.FC<StickersListProps> = ({ stickerPack, is_description }) => {
+export const StickersList = ({ stickerPack }: StickersListProps) => {
   const {
+    name,
     title,
     stickers,
+    is_video,
     is_animated,
     contains_masks
   } = stickerPack
@@ -24,21 +25,14 @@ export const StickersList: React.FC<StickersListProps> = ({ stickerPack, is_desc
 
   return (
     <React.Fragment>
-      {is_description &&
-        <Description>
-          <Badge color="#242f3d">
-            <StringReplace str={title} />
-          </Badge>
-          {contains_masks ?
-            <Badge color="#4CAF50">Masks</Badge> :
-            <Badge color="#4CAF50">Without Masks</Badge>
-          }
-          {is_animated ?
-            <Badge color="#673AB7">Animated</Badge> :
-            <Badge color="#673AB7">Static</Badge>
-          }
-        </Description>
-      }
+      <Description>
+        <Badge color="#242f3d">
+          <StringReplace str={title} />
+        </Badge>
+        {is_video && <Badge color="#4CAF50">Video</Badge>}
+        {contains_masks && <Badge color="#f44336">Mask</Badge>}
+        {is_animated && <Badge color="#673AB7">Animated</Badge>}
+      </Description>
       <List>
         {stickers.map(({ file_id, emoji }, key) => {
           if (is_animated) {
@@ -53,25 +47,44 @@ export const StickersList: React.FC<StickersListProps> = ({ stickerPack, is_desc
                 class={TgsImage}
               />
             )
-          } else {
+          }
+
+          if (is_video) {
             return (
-              <WebpImage
+              <video
+                loop
                 key={key}
-                alt={emoji}
-                width={128}
+                autoPlay={false}
+                controls={false}
                 height={128}
-                src={`/api/image/${file_id}`}
-              />
+                width={128}
+                className={TgsImage}
+                onMouseEnter={(event) => {
+                  event.currentTarget.play()
+                }}
+                onMouseLeave={(event) => {
+                  event.currentTarget.pause()
+                  event.currentTarget.currentTime = 0
+                }}
+              >
+                <source src={`/api/image/${file_id}`} />
+              </video>
             )
           }
+
+          return (
+            <WebpImage
+              key={key}
+              alt={emoji}
+              width={128}
+              height={128}
+              src={`/api/image/${file_id}`}
+            />
+          )
         })}
       </List>
     </React.Fragment>
   )
-}
-
-StickersList.defaultProps = {
-  is_description: false
 }
 
 const TgsImage = css`

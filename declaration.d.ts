@@ -1,5 +1,5 @@
 declare namespace JSX {
   interface IntrinsicElements {
-    'tgs-player': any
+    'tgs-player': unknown
   }
 }

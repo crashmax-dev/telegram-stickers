@@ -6,7 +6,7 @@ interface ClipboardProps {
   text: string
 }
 
-export const Clipboard: React.FC<ClipboardProps> = ({ text }) => {
+export const Clipboard = ({ text }: ClipboardProps) => {
   const [copied, setCopied] = useState(false)
 
   const onCopy = () => {

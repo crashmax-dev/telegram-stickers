@@ -5,7 +5,7 @@ interface StringReplaceProps {
   str: string
 }
 
-export const StringReplace: React.FC<StringReplaceProps> = ({ str }) => {
+export const StringReplace = ({ str }: StringReplaceProps) => {
   return (
     <React.Fragment>
       {ReactStringReplace(str, /@(\w+)/g, (match, key) => (

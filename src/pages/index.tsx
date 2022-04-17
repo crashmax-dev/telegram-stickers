@@ -5,7 +5,8 @@ import { Layout } from '~/components/Layout'
 import { Clipboard } from '~/components/Clipboard'
 import { LoadingIcon } from '~/components/Icons'
 import { StickersList } from '~/components/StickersList'
-import { StickerSet } from 'telegraf/typings/core/types/typegram'
+import { AddStickers } from '~/components/AddStickers'
+import type { StickerSet } from 'telegraf/typings/core/types/typegram'
 
 export default function IndexPage() {
   const [text, setText] = useState('')
@@ -60,7 +61,12 @@ export default function IndexPage() {
           {stickerPack && <Clipboard text={window.location.href + query} />}
         </InputRightElement>
       </FormInput>
-      {stickerPack?.stickers && <StickersList stickerPack={stickerPack} is_description />}
+      {stickerPack?.stickers && (
+        <React.Fragment>
+          <StickersList stickerPack={stickerPack} />
+          <AddStickers name={stickerPack.name} />
+        </React.Fragment>
+      )}
     </Layout>
   )
 }
@@ -87,7 +93,7 @@ const Input = styled.input`
   :active, :focus {
     outline: none;
   }
-  
+
   ::placeholder {
     color: #6C7883;
   }

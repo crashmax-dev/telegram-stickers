@@ -1,5 +1,5 @@
-import { Telegram } from '~/lib/Telegraf'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { Telegram } from '~/lib/telegram'
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {

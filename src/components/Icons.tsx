@@ -1,10 +1,11 @@
-import React, { CSSProperties } from 'react'
+import React from 'react'
+import type { CSSProperties } from 'react'
 
 interface LoadingIconProps {
   style?: CSSProperties
 }
 
-export const LoadingIcon: React.FC<LoadingIconProps> = (props) => (
+export const LoadingIcon = (props: LoadingIconProps) => (
   <svg viewBox="0 0 24 24" {...props}>
     <defs>
       <linearGradient x1="28.154%" y1="63.74%" x2="74.629%" y2="17.783%" id="a">

@@ -11,7 +11,6 @@ interface StickersListProps {
 
 export const StickersList = ({ stickerPack }: StickersListProps) => {
   const {
-    name,
     title,
     stickers,
     is_video,
@@ -20,7 +19,9 @@ export const StickersList = ({ stickerPack }: StickersListProps) => {
   } = stickerPack
 
   useEffect(() => {
-    import('@lottiefiles/lottie-player/dist/tgs-player')
+    if (is_animated) {
+      import('@lottiefiles/lottie-player/dist/tgs-player')
+    }
   }, [])
 
   return (
@@ -32,6 +33,7 @@ export const StickersList = ({ stickerPack }: StickersListProps) => {
         {is_video && <Badge color="#4CAF50">Video</Badge>}
         {contains_masks && <Badge color="#f44336">Mask</Badge>}
         {is_animated && <Badge color="#673AB7">Animated</Badge>}
+        {(!is_animated && !is_video) && <Badge color="#03a9f4">Static</Badge>}
       </Description>
       <List>
         {stickers.map(({ file_id, emoji }, key) => {

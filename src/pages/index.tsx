@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import styled from '@emotion/styled'
 import { useDebounce } from 'use-debounce'
-import { styled } from 'linaria/react'
 import { Layout } from '~/components/Layout'
 import { Clipboard } from '~/components/Clipboard'
 import { LoadingIcon } from '~/components/Icons'

@@ -1,4 +1,4 @@
-import { styled } from 'linaria/react'
+import styled from '@emotion/styled'
 import { useRouter } from 'next/router'
 import type { StickerSet } from 'telegraf/typings/core/types/typegram'
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Image from 'next/image'
-import { css } from 'linaria'
-import { styled } from 'linaria/react'
+import styled from '@emotion/styled'
+import { css } from '@emotion/css'
 import { StringReplace } from './StringReplace'
 import type { StickerSet } from 'telegraf/typings/core/types/typegram'
 

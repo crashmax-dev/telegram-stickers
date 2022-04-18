@@ -1,4 +1,4 @@
-import { css } from 'linaria'
+import { css } from '@emotion/css'
 
 /**
  * @link https://github.com/tholman/github-corners
@@ -8,7 +8,7 @@ export const GithubCorner = () => (
   <a
     href="https://github.com/crashmax-dev/telegram-stickers"
     target="_blank"
-    className={cornerStyles}
+    className={corner}
     aria-label="View source on GitHub"
     rel="noreferrer"
   >
@@ -16,7 +16,7 @@ export const GithubCorner = () => (
       width="80"
       height="80"
       viewBox="0 0 250 250"
-      className={corserAnimation}
+      className={animation}
       aria-hidden="true"
     >
       <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -26,7 +26,7 @@ export const GithubCorner = () => (
   </a>
 )
 
-const cornerStyles = css`
+const corner = css`
   fill: #ffffff;
   color: #1a202c;
   position: absolute;
@@ -35,7 +35,7 @@ const cornerStyles = css`
   right: 0;
 `
 
-const corserAnimation = css`
+const animation = css`
   & > :nth-child(2) {
     transform-origin: 130px 106px;
   }

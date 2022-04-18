@@ -1,7 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { css } from 'linaria'
-import { styled } from 'linaria/react'
+import styled from '@emotion/styled'
 import { Header } from './Header'
 import { LoadingIcon } from './Icons'
 import { GithubCorner } from './GithubCorner'
@@ -17,7 +16,6 @@ export const Layout: React.FC<LayoutProps> = ({ title, justifyContent, loading, 
     <Main justifyContent={justifyContent}>
       <Head>
         <title>{title}</title>
-        {GlobalStyles}
       </Head>
       {loading ?
         <LoadingIcon style={{ width: '46px', height: '46px' }} /> :
@@ -35,43 +33,6 @@ Layout.defaultProps = {
   title: 'Telegram Stickers',
   loading: false
 }
-
-const GlobalStyles = css`
-  :global() {
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
-
-    * {
-      margin: 0;
-      border: 0 solid;
-      box-sizing: border-box;
-    }
-
-    ::selection {
-      color: #0E1621;
-      background-color: #FFF;
-    }
-
-    #__next {
-      height: inherit;
-    }
-
-    html, body {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      font-family: 'Inter', sans-serif;
-    }
-
-    a {
-      color: #429BDB;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  }
-`
 
 const Main = styled.main<LayoutProps>`
   height: inherit;
